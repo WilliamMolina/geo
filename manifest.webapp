@@ -1,0 +1,19 @@
+{
+  "name": "My Geo",
+  "description": "Testing geolocalization",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "William Molina",
+    "url": "https://github.com/WilliamMolina"
+  },
+  "icons": {
+    "128": "style/icons/128.png",
+    "84": "style/icons/84.png"
+  },
+"permissions": {
+	"geolocation": { "description":"Get current location by user."},
+	"desktop-notification":{}
+},
+  "orientation": "portrait-primary"
+}
+

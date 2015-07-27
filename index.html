@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Geo!</title>
+<script type="text/javascript">
+function geoFindMe() {
+  var output = document.getElementById("out");
+
+  if (!navigator.geolocation){
+    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+    return;
+  }
+
+  function success(position) {
+    var latitude  = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+
+    var img = new Image();
+    img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+
+    output.appendChild(img);
+    var notification = navigator.mozNotification.createNotification(
+        "Hey, check this out!", "Your location is "+latitude+" "+longitude,"style/icons/84.png");
+    notification.show();
+  };
+
+  function error() {
+    output.innerHTML = "Unable to retrieve your location";
+  };
+
+  output.innerHTML = "<p>Locating…</p>";
+
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+</script>
+<script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js">
+</script>
+<script>
+$(document).ready(function(){
+   $("image").click(function(evento){
+      geoFindMe();
+   });
+});
+</script>
+<style type="text/css">
+#image{
+width:20%;
+height:14%;
+padding:0px;
+border-radius:50%;
+box-shadow:0px 2px 3px #2d2d2d;
+}
+#image img{
+width:100%;
+height:100%;
+}
+</style>
+</head>
+<body style="background:#00adef;color:#f9f9f9;">
+<p><button onclick="geoFindMe()">Show my location</button></p>
+<div id="out"></div>
+<div id="image"><img src="style/icons/84.png"/></div>
+</body>
+</html>
